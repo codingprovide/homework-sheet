@@ -22,45 +22,86 @@ function Calendar() {
     setSpecifiedDate(addDays(specifiedDate, 1));
   }
 
-  const handleTodayDate = function():void {
+  const handleTodayDate = function (): void {
     setSpecifiedDate(new Date());
   }
 
-  console.log("WeekDates", weekDates);
+  const tbodyRight = "border border-t-0 border-l-0 border-gray-100 border-r-gray-200";
 
   return (
-    <div className=" text-xs p-4">
+    <div className=" text-sm p-4">
       {/* table herad */}
-      <div className=" p-2 bg-slate-50 rounded-t-md">
+      <div className=" p-2 bg-slate-50 rounded-t-md border border-b-0">
         <div className="flex justify-between items-center">
           <div>{format(specifiedDate, "MM")}月 {format(specifiedDate, "yyyy")}</div>
-          <div className=" flex justify-center items-center border p-1 rounded-md">
-            <button className=" text-slate-300" onClick={handlePreviousDate}><BsCaretLeftFill /></button>
+          <div className=" flex justify-center items-center border p-1 rounded-md gap-3">
+            <button className=" text-slate-300 p-1 px-2" onClick={handlePreviousDate}><BsCaretLeftFill size={20} /></button>
             <button onClick={handleTodayDate}>Today</button>
-            <button className=" text-slate-300" onClick={handleNextDate}><BsCaretRightFill /></button>
+            <button className=" text-slate-300 p-1 px-2" onClick={handleNextDate}><BsCaretRightFill size={20} /></button>
           </div>
         </div>
       </div>
       {/* table title */}
-      <div className=" grid grid-cols-12 border border-l-1 border-gray-200">
-        <div className=" col-span-1"></div>
-        <div className=" col-span-10 grid grid-cols-7">
-          {weekList.map((day, weekindex) =>
-            <div className=" flex-row justify-center items-center border-l-[1px] border-gray-100">
-              <span key={weekindex} className=" w-full inline-block text-center">
-                {day}
-              </span>
+      <div className=" grid grid-cols-7 border border-l-1 border-gray-200 shadow-sm">
+        {weekList.map((day, weekindex) =>
+          <div className=" flex-row justify-center items-center border-l-[1px] border-gray-100">
+            <span key={weekindex} className=" w-full inline-block text-center mt-2">
+              {day}
+            </span>
+            <div className=" flex justify-center items-center mb-3 mt-2">
               <span className={
                 format(specifiedDate, "dd") === format(weekDates[weekindex], "dd") ?
-                  "bg-blue-500  w-full inline-block rounded-full leading-6 text-center" :
+                  "bg-blue-500  w-6 h-6 inline-block rounded-full leading-6 text-center text-white" :
                   "  inline-block leading-6 w-full text-center"
               }>
                 {format(weekDates[weekindex], "dd")}
               </span>
             </div>
-          )}
+          </div>
+        )}
+        {/* <div className=" border-l border-gray-100 col-span-1"></div> */}
+      </div>
+      {/* table body */}
+      <div className="flex h-screen w-full relative">
+        <div className=" border border-t-0 flex-none w-2/6 grid grid-rows-10 text-center text-xs">
+          <div>第10節</div>
+          <div>18:10 - 18:55</div>
+          <div>第11節</div>
+          <div>19:00 - 19:45</div>
+          <div>第12節</div>
+          <div>19:50 - 20:35</div>
+          <div>第13節</div>
+          <div>20:40 - 21:25</div>
+          <div>第14節</div>
+          <div>21:30 - 22:15</div>
         </div>
-        <div className=" border-l border-gray-100 col-span-1"></div>
+        <div className="h-full w-4/6 grid grid-rows-10">
+          <div className={tbodyRight}></div>
+          <div className={tbodyRight}></div>
+          <div className={tbodyRight}></div>
+          <div className={tbodyRight}></div>
+          <div className={tbodyRight}></div>
+          <div className={tbodyRight}></div>
+          <div className={tbodyRight}></div>
+          <div className={tbodyRight}></div>
+          <div className={tbodyRight}></div>
+          <div className={`${tbodyRight} border-b-2`} ></div>
+        </div>
+
+        <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 px-2 py-0">
+          <div className=" bg-blue-50">
+            <span>
+              賴欣揚
+              國文 (一)
+              <p>國秀樓411教室</p>
+            </span>
+          </div>
+          <div className=" bg-red-50 mt-1"></div>
+          <div className=" bg-yellow-50 mt-1"></div>
+          <div className=" bg-green-50 mt-1"></div>
+          <div className=" bg-orange-50 mt-1"></div>
+        </div>
+
       </div>
 
     </div>
