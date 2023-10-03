@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs"
-import { addDays, eachDayOfInterval, endOfWeek, subDays, startOfWeek, format } from "date-fns";
+import { addDays, eachDayOfInterval, endOfWeek, subDays, startOfWeek, format, getDay } from "date-fns";
 
 function Calendar() {
 
@@ -27,6 +27,14 @@ function Calendar() {
   }
 
   const tbodyRight = "border border-t-0 border-l-0 border-gray-100 border-r-gray-200";
+
+  const tuesdayCourse = [
+    {
+      teacher:"林基源",
+      course:"數位邏輯概論",
+      classroom:"工程館5F,E531"
+    }
+  ]
 
   return (
     <div className=" text-sm p-4">
@@ -88,22 +96,29 @@ function Calendar() {
           <div className={`${tbodyRight} border-b-2`} ></div>
         </div>
 
-        <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 px-2 py-0">
-          <div className=" bg-blue-50">
-            <span>
-              賴欣揚
-              國文 (一)
-              <p>國秀樓411教室</p>
-            </span>
+        {getDay(specifiedDate) === 2 && (
+          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1">
+            <div className=" bg-blue-50 text-center">
+                <div>{tuesdayCourse[0].teacher}</div>
+                <div>{tuesdayCourse[0].course}</div>
+                <div>{tuesdayCourse[0].classroom}</div>
+            </div>
+            <div className=" bg-blue-50 text-center">
+                <div>{tuesdayCourse[0].teacher}</div>
+                <div>{tuesdayCourse[0].course}</div>
+                <div>{tuesdayCourse[0].classroom}</div>
+            </div>
+            <div className=" bg-blue-50 text-center">
+                <div>{tuesdayCourse[0].teacher}</div>
+                <div>{tuesdayCourse[0].course}</div>
+                <div>{tuesdayCourse[0].classroom}</div>
+            </div>
+            <div className=" bg-green-50 mt-1"></div>
+            <div className=" bg-orange-50 mt-1"></div>
           </div>
-          <div className=" bg-red-50 mt-1"></div>
-          <div className=" bg-yellow-50 mt-1"></div>
-          <div className=" bg-green-50 mt-1"></div>
-          <div className=" bg-orange-50 mt-1"></div>
-        </div>
+        )}
 
       </div>
-
     </div>
   )
 }
