@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs"
 import { addDays, eachDayOfInterval, endOfWeek, subDays, startOfWeek, format, getDay } from "date-fns";
+import { mondayCourse, tuesdayCourse, wednesdayCourse, thuresdayCourse, fridayCourse } from "../../courses"
 
 function Calendar() {
 
@@ -26,18 +27,13 @@ function Calendar() {
     setSpecifiedDate(new Date());
   }
 
-  const tbodyRight = "border border-t-0 border-l-0 border-gray-100 border-r-gray-200";
-
-  const tuesdayCourse = [
-    {
-      teacher:"林基源",
-      course:"數位邏輯概論",
-      classroom:"工程館5F,E531"
-    }
-  ]
+  const handleChooseDate = function (weekindex: number): void {
+    let chooseDate = weekDates[weekindex];
+    setSpecifiedDate(chooseDate);
+  }
 
   return (
-    <div className=" text-sm p-4">
+    <div className=" text-sm p-4 h-screen">
       {/* table herad */}
       <div className=" p-2 bg-slate-50 rounded-t-md border border-b-0">
         <div className="flex justify-between items-center">
@@ -51,16 +47,16 @@ function Calendar() {
       </div>
       {/* table title */}
       <div className=" grid grid-cols-7 border border-l-1 border-gray-200 shadow-sm">
-        {weekList.map((day, weekindex) =>
+        {weekList.map((week, weekindex) =>
           <div className=" flex-row justify-center items-center border-l-[1px] border-gray-100">
             <span key={weekindex} className=" w-full inline-block text-center mt-2">
-              {day}
+              {week}
             </span>
             <div className=" flex justify-center items-center mb-3 mt-2">
-              <span className={
+              <span onClick={() => handleChooseDate(weekindex)} className={
                 format(specifiedDate, "dd") === format(weekDates[weekindex], "dd") ?
-                  "bg-blue-500  w-6 h-6 inline-block rounded-full leading-6 text-center text-white" :
-                  "  inline-block leading-6 w-full text-center"
+                  "bg-blue-500  w-7 h-7 inline-block rounded-full leading-7 text-center text-white text-lg hover:cursor-pointer" :
+                  "  inline-block leading-6 w-full text-center text-lg hover:cursor-pointer"
               }>
                 {format(weekDates[weekindex], "dd")}
               </span>
@@ -70,51 +66,116 @@ function Calendar() {
         {/* <div className=" border-l border-gray-100 col-span-1"></div> */}
       </div>
       {/* table body */}
-      <div className="flex h-screen w-full relative">
-        <div className=" border border-t-0 flex-none w-2/6 grid grid-rows-10 text-center text-xs">
-          <div>第10節</div>
-          <div>18:10 - 18:55</div>
-          <div>第11節</div>
-          <div>19:00 - 19:45</div>
-          <div>第12節</div>
-          <div>19:50 - 20:35</div>
-          <div>第13節</div>
-          <div>20:40 - 21:25</div>
-          <div>第14節</div>
-          <div>21:30 - 22:15</div>
+      <div className="flex h-3/4 w-full relative">
+        <div className=" border border-t-0 flex-none w-2/6 grid grid-rows-5 text-center text-xs">
+          <div className="  flex justify-center items-center">
+            <div className="flex-none w-1/3 h-full flex items-center justify-center border-r">10</div>
+            <div className=" w-2/3">
+              <div className="">18:10</div>
+              <div className="">|</div>
+              <div>18:55</div>
+            </div>
+          </div>
+          <div className="  flex justify-center items-center">
+            <div className="flex-none w-1/3 h-full flex items-center justify-center border-r">11</div>
+            <div className=" w-2/3">
+              <div className="">19:00</div>
+              <div className="">|</div>
+              <div>19:45</div>
+            </div>
+          </div>
+          <div className="  flex justify-center items-center">
+            <div className="flex-none w-1/3 h-full flex items-center justify-center border-r">12</div>
+            <div className=" w-2/3">
+              <div className="">19:50</div>
+              <div className="">|</div>
+              <div>20:35</div>
+            </div>
+          </div>
+          <div className="  flex justify-center items-center">
+            <div className="flex-none w-1/3 h-full flex items-center justify-center border-r">13</div>
+            <div className=" w-2/3">
+              <div className="">20:40</div>
+              <div className="">|</div>
+              <div>21:25</div>
+            </div>
+          </div>
+          <div className="  flex justify-center items-center">
+            <div className="flex-none w-1/3 h-full flex items-center justify-center border-r">14</div>
+            <div className=" w-2/3">
+              <div className="">21:30</div>
+              <div className="">|</div>
+              <div>22:15</div>
+            </div>
+          </div>
         </div>
         <div className="h-full w-4/6 grid grid-rows-10">
-          <div className={tbodyRight}></div>
-          <div className={tbodyRight}></div>
-          <div className={tbodyRight}></div>
-          <div className={tbodyRight}></div>
-          <div className={tbodyRight}></div>
-          <div className={tbodyRight}></div>
-          <div className={tbodyRight}></div>
-          <div className={tbodyRight}></div>
-          <div className={tbodyRight}></div>
-          <div className={`${tbodyRight} border-b-2`} ></div>
+          <div className="border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
+          <div className="border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
+          <div className="border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
+          <div className="border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
+          <div className="border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
+          <div className="border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
+          <div className="border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
+          <div className="border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
+          <div className="border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
+          <div className="border-b-2 border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
         </div>
 
+        {getDay(specifiedDate) === 1 && (
+          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
+            {mondayCourse.map((course, index) => (
+              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
+                <div>{course.teacher}</div>
+                <div>{course.course}</div>
+                <div>{course.classroom}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
         {getDay(specifiedDate) === 2 && (
-          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1">
-            <div className=" bg-blue-50 text-center">
-                <div>{tuesdayCourse[0].teacher}</div>
-                <div>{tuesdayCourse[0].course}</div>
-                <div>{tuesdayCourse[0].classroom}</div>
-            </div>
-            <div className=" bg-blue-50 text-center">
-                <div>{tuesdayCourse[0].teacher}</div>
-                <div>{tuesdayCourse[0].course}</div>
-                <div>{tuesdayCourse[0].classroom}</div>
-            </div>
-            <div className=" bg-blue-50 text-center">
-                <div>{tuesdayCourse[0].teacher}</div>
-                <div>{tuesdayCourse[0].course}</div>
-                <div>{tuesdayCourse[0].classroom}</div>
-            </div>
-            <div className=" bg-green-50 mt-1"></div>
-            <div className=" bg-orange-50 mt-1"></div>
+          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
+            {tuesdayCourse.map((course, index) => (
+              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
+                <div>{course.teacher}</div>
+                <div>{course.course}</div>
+                <div>{course.classroom}</div>
+              </div>
+            ))}
+          </div>
+        )}
+        {getDay(specifiedDate) === 3 && (
+          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
+            {wednesdayCourse.map((course, index) => (
+              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
+                <div>{course.teacher}</div>
+                <div>{course.course}</div>
+                <div>{course.classroom}</div>
+              </div>
+            ))}
+          </div>
+        )}
+        {getDay(specifiedDate) === 4 && (
+          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
+            {thuresdayCourse.map((course, index) => (
+              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
+                <div>{course.teacher}</div>
+                <div>{course.course}</div>
+                <div>{course.classroom}</div>
+              </div>
+            ))}
+          </div>
+        )}
+        {getDay(specifiedDate) === 5 && (
+          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
+            {fridayCourse.map((course, index) => (
+              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
+                <div>{course.teacher}</div>
+                <div>{course.course}</div>
+                <div>{course.classroom}</div>
+              </div>
+            ))}
           </div>
         )}
 
