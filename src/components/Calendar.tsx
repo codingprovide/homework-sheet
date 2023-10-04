@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs"
-import { addDays, eachDayOfInterval, endOfWeek, subDays, startOfWeek, format, getDay } from "date-fns";
-import { mondayCourse, tuesdayCourse, wednesdayCourse, thuresdayCourse, fridayCourse } from "../../courses"
+import { addDays, eachDayOfInterval, endOfWeek, subDays, startOfWeek, format } from "date-fns";
+import { mondayCourse, tuesdayCourse, wednesdayCourse, thuresdayCourse, fridayCourse } from "../../coursesList"
+import Courses from "./Courses";
+
 
 function Calendar() {
+
+  const colorVariants = {
+    blue:"bg-blue-50",
+    green:"bg-green-50"
+  }
 
   const weekList = ["日", "一", "二", "三", "四", "五", "六"];
 
@@ -122,62 +129,14 @@ function Calendar() {
           <div className="border-b-2 border border-t-0 border-l-0 border-gray-100 border-r-gray-200"></div>
         </div>
 
-        {getDay(specifiedDate) === 1 && (
-          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
-            {mondayCourse.map((course, index) => (
-              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
-                <div>{course.teacher}</div>
-                <div>{course.course}</div>
-                <div>{course.classroom}</div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {getDay(specifiedDate) === 2 && (
-          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
-            {tuesdayCourse.map((course, index) => (
-              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
-                <div>{course.teacher}</div>
-                <div>{course.course}</div>
-                <div>{course.classroom}</div>
-              </div>
-            ))}
-          </div>
-        )}
-        {getDay(specifiedDate) === 3 && (
-          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
-            {wednesdayCourse.map((course, index) => (
-              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
-                <div>{course.teacher}</div>
-                <div>{course.course}</div>
-                <div>{course.classroom}</div>
-              </div>
-            ))}
-          </div>
-        )}
-        {getDay(specifiedDate) === 4 && (
-          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
-            {thuresdayCourse.map((course, index) => (
-              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
-                <div>{course.teacher}</div>
-                <div>{course.course}</div>
-                <div>{course.classroom}</div>
-              </div>
-            ))}
-          </div>
-        )}
-        {getDay(specifiedDate) === 5 && (
-          <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
-            {fridayCourse.map((course, index) => (
-              <div className={`${course.courseColor} text-center rounded-sm justify-center items-center grid mt-1`} key={index}>
-                <div>{course.teacher}</div>
-                <div>{course.course}</div>
-                <div>{course.classroom}</div>
-              </div>
-            ))}
-          </div>
-        )}
+        <Courses specifiedDate={specifiedDate}
+          mondayCourse={mondayCourse}
+          tuesdayCourse={tuesdayCourse}
+          thuresdayCourse={thuresdayCourse}
+          wednesdayCourse={wednesdayCourse}
+          fridayCourse={fridayCourse}
+          colorVariants={colorVariants}
+          />
 
       </div>
     </div>

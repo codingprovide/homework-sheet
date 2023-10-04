@@ -1,91 +1,91 @@
-interface Course {
+interface CourseList {
     teacher?: string,
     course?: string,
     classroom?: string,
     courseColor?: string
 }
 
-export let mondayCourse: Course[] = [
+export let mondayCourse: CourseList[] = [
     {
         teacher: "賴欣陽",
         course: "國文(一)",
         classroom: "國秀樓, 411",
-        courseColor: "bg-blue-50"
+        courseColor: "blue"
     },
     {
         teacher: "賴欣陽",
         course: "國文(一)",
         classroom: "國秀樓, 411",
-        courseColor: "bg-blue-50"
+        courseColor: "blue"
     },
     {
         teacher: "施啟煌",
         course: "全校共同時間",
-        courseColor: "bg-green-50"
+        courseColor: "green"
     },
     {
         teacher: "施啟煌",
         course: "全校共同時間",
-        courseColor: "bg-green-50"
+        courseColor: "green"
     }
 ]
 
-export let tuesdayCourse: Course[] = [
+export let tuesdayCourse: CourseList[] = [
     {
         teacher: "林基源",
         course: "數位邏輯概論",
         classroom: "工程館5F,E531",
-        courseColor: "bg-blue-50"
+        courseColor: "blue"
     },
     {
         teacher: "林基源",
         course: "數位邏輯概論",
         classroom: "工程館5F,E531",
-        courseColor: "bg-blue-50"
+        courseColor: "blue"
     },
     {
         teacher: "林基源",
         course: "數位邏輯概論",
         classroom: "工程館5F,E531",
-        courseColor: "bg-blue-50"
+        courseColor: "blue"
     },
 
 ];
 
-export let wednesdayCourse:Course[] = [
+export let wednesdayCourse:CourseList[] = [
     {
         teacher:"韋磊",
         course:"體育(一)",
         classroom:"青永館4F,桌球教室",
-        courseColor:"bg-blue-50"
+        courseColor:"blue"
     },
     {
         teacher:"韋磊",
         course:"體育(一)",
         classroom:"青永館4F,桌球教室",
-        courseColor:"bg-blue-50"
+        courseColor:"blue"
     },
     {
         teacher:"陳焜燦",
         course:"微積分(一)",
         classroom:"國秀樓,411",
-        courseColor:"bg-green-50"
+        courseColor:"green"
     },
     {
         teacher:"陳焜燦",
         course:"微積分(一)",
         classroom:"國秀樓,411",
-        courseColor:"bg-green-50"
+        courseColor:"green"
     },
     {
         teacher:"陳焜燦",
         course:"微積分(一)",
         classroom:"國秀樓,411",
-        courseColor:"bg-green-50"
+        courseColor:"green"
     }
 ]
 
-export let thuresdayCourse:Course[] = [
+export let thuresdayCourse:CourseList[] = [
     {
         
     },
@@ -99,46 +99,46 @@ export let thuresdayCourse:Course[] = [
         teacher: "賴欣陽",
         course: "國文(一)",
         classroom: "國秀樓, 411",
-        courseColor: "bg-blue-50"
+        courseColor: "blue"
     },
     {
         teacher: "賴欣陽",
         course: "國文(一)",
         classroom: "國秀樓, 411",
-        courseColor: "bg-blue-50"
+        courseColor: "blue"
     },
     
 ]
 
-export let fridayCourse:Course[] = [
+export let fridayCourse:CourseList[] = [
     {
         teacher:"黃宣詔",
         course:"計算機概論",
         classroom:"工程館5F, E529",
-        courseColor:"bg-blue-50"
+        courseColor:"blue"
     },
     {
         teacher:"黃宣詔",
         course:"計算機概論",
         classroom:"工程館5F, E529",
-        courseColor:"bg-blue-50"
+        courseColor:"blue"
     },
     {
         teacher:"黃宣詔",
         course:"計算機概論",
         classroom:"工程館5F, E529",
-        courseColor:"bg-blue-50"
+        courseColor:"blue"
     },
     {
         teacher:"廖姿婓",
         course:"英文(一)",
         classroom:"國秀樓,411",
-        courseColor:"bg-green-50"
+        courseColor:"green"
     },
     {
         teacher:"廖姿婓",
         course:"英文(一)",
         classroom:"國秀樓,411",
-        courseColor:"bg-green-50"
+        courseColor:"green"
     },
 ]
