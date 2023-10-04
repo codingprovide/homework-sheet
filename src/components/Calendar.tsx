@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs"
-import { addDays, eachDayOfInterval, endOfWeek, subDays, startOfWeek, format } from "date-fns";
+import { addDays, eachDayOfInterval, endOfWeek, subDays, startOfWeek, format, getWeek, } from "date-fns";
 import { mondayCourse, tuesdayCourse, wednesdayCourse, thuresdayCourse, fridayCourse } from "../../coursesList"
 import Courses from "./Courses";
 
@@ -8,8 +8,8 @@ import Courses from "./Courses";
 function Calendar() {
 
   const colorVariants = {
-    blue:"bg-blue-50",
-    green:"bg-green-50"
+    blue: "bg-blue-50",
+    green: "bg-green-50"
   }
 
   const weekList = ["日", "一", "二", "三", "四", "五", "六"];
@@ -21,6 +21,51 @@ function Calendar() {
   const endDate = endOfWeek(specifiedDate);
   //生成一周日期列表
   const weekDates = eachDayOfInterval({ start: startDate, end: endDate });
+
+
+
+    const getWeekisOddNumber = function (specifiedDate: Date): boolean {
+      const weekNumber = getWeek(specifiedDate);
+      if (weekNumber % 2 === 0) {
+        return false
+      } else {
+        return true
+      }
+    }
+
+
+    interface CourseList {
+      teacher?: string,
+      course?: string,
+      classroom?: string,
+      courseColor?: string
+    }
+
+    const changeMondayCourse = function (mondayCourse: CourseList[]) {
+      const isOddNumber = getWeekisOddNumber(specifiedDate);
+      if (isOddNumber === false) {
+        mondayCourse[0].teacher = "廖姿婓";
+        mondayCourse[0].course = "英文(一)";
+        mondayCourse[1].teacher = "廖姿婓";
+        mondayCourse[1].course = "英文(一)";
+      } else {
+        mondayCourse[0].teacher = "賴欣陽";
+        mondayCourse[0].course = "國文(一)";
+        mondayCourse[1].teacher = "賴欣陽";
+        mondayCourse[1].course = "國文(一)";
+      }
+    }
+
+    useEffect(() => {
+      changeMondayCourse(mondayCourse);
+    },[specifiedDate])
+
+
+
+
+
+
+
 
   const handlePreviousDate = function (): void {
     setSpecifiedDate(subDays(specifiedDate, 1));
@@ -136,7 +181,7 @@ function Calendar() {
           wednesdayCourse={wednesdayCourse}
           fridayCourse={fridayCourse}
           colorVariants={colorVariants}
-          />
+        />
 
       </div>
     </div>
