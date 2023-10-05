@@ -83,7 +83,6 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
 
     useEffect (() => {
         checkCurrentTime();
-        console.log("FirstcurrentClassNumber:", currentClassNumber)
         const intervalId = setInterval(checkCurrentTime, 10000);
 
         return () => {
@@ -91,10 +90,6 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
         }
 
     }, [])
-
-    useEffect(() => {
-        console.log("SecondcurrentClassNumber:",currentClassNumber);
-    },[currentClassNumber])
 
     interface CourseData {
         1: CourseList[]
