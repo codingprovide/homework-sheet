@@ -39,8 +39,6 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
 
 
     const currentTime = new Date();
-    currentTime.setHours(21);
-    currentTime.setMinutes(50);
 
     const classTimeList: ClassTimeList[] = [
         {
