@@ -1,7 +1,7 @@
 import getDay from "date-fns/getDay"
 import clsx from "clsx"
 import { parse, isWithinInterval } from "date-fns"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 
 interface CourseList {
     course?: string,
@@ -30,7 +30,38 @@ interface Courses {
 function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, thuresdayCourse, fridayCourse, colorVariants }: Courses) {
 
     const [currentClassNumber, setCurrentClassNumber] = useState<number | undefined>(undefined);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isRendered, setIsRendered] = useState(false);
+    
+    useEffect(() => {
+        // 使用 requestAnimationFrame 替代 setInterval
+        setIsLoading(false);
 
+        if (specifiedDate.toDateString() === currentTime.toDateString()) {
+
+            let animationFrameId: number;
+
+            const handleAnimationFrame = () => {
+                checkCurrentTime();
+                animationFrameId = requestAnimationFrame(handleAnimationFrame);
+            };
+
+            animationFrameId = requestAnimationFrame(handleAnimationFrame);
+
+            return () => {
+                // 清除 requestAnimationFrame
+                cancelAnimationFrame(animationFrameId);
+            };
+
+        }
+    }, [specifiedDate]);
+
+    useLayoutEffect(() => {
+        setIsRendered(true);
+    }, [isLoading])
+
+
+    
     interface ClassTimeList {
         classNumber: number
         startTime: Date
@@ -81,36 +112,10 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
         setCurrentClassNumber(newCurrentClassNumber);
     }
 
-    // useEffect (() => {
-    //     checkCurrentTime();
-    //     const intervalId = setInterval(checkCurrentTime, 10000);
 
-    //     return () => {
-    //         clearInterval(intervalId);
-    //     }
 
-    // }, [])
 
-    useEffect(() => {
-        // 使用 requestAnimationFrame 替代 setInterval
-        if (specifiedDate.toDateString() === currentTime.toDateString()) {
 
-            let animationFrameId: number;
-
-            const handleAnimationFrame = () => {
-                checkCurrentTime();
-                animationFrameId = requestAnimationFrame(handleAnimationFrame);
-            };
-
-            animationFrameId = requestAnimationFrame(handleAnimationFrame);
-
-            return () => {
-                // 清除 requestAnimationFrame
-                cancelAnimationFrame(animationFrameId);
-            };
-
-        }
-    }, [specifiedDate]);
 
     interface CourseData {
         1: CourseList[]
@@ -132,7 +137,7 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
 
     return (
         <>
-            {courseData[getDayOfWeek as keyof CourseData] && (
+            {courseData[getDayOfWeek as keyof CourseData] && isRendered &&(
                 <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
                     {courseData[getDayOfWeek as keyof CourseData].map((course, index) => (
                         <div className={clsx(
