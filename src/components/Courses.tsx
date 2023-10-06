@@ -81,15 +81,36 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
         setCurrentClassNumber(newCurrentClassNumber);
     }
 
-    useEffect (() => {
-        checkCurrentTime();
-        const intervalId = setInterval(checkCurrentTime, 10000);
+    // useEffect (() => {
+    //     checkCurrentTime();
+    //     const intervalId = setInterval(checkCurrentTime, 10000);
 
-        return () => {
-            clearInterval(intervalId);
+    //     return () => {
+    //         clearInterval(intervalId);
+    //     }
+
+    // }, [])
+
+    useEffect(() => {
+        // 使用 requestAnimationFrame 替代 setInterval
+        if (specifiedDate.toDateString() === currentTime.toDateString()) {
+
+            let animationFrameId: number;
+
+            const handleAnimationFrame = () => {
+                checkCurrentTime();
+                animationFrameId = requestAnimationFrame(handleAnimationFrame);
+            };
+
+            animationFrameId = requestAnimationFrame(handleAnimationFrame);
+
+            return () => {
+                // 清除 requestAnimationFrame
+                cancelAnimationFrame(animationFrameId);
+            };
+
         }
-
-    }, [])
+    }, [specifiedDate]);
 
     interface CourseData {
         1: CourseList[]
@@ -120,14 +141,14 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
                             {
                                 " shadow-lg animate-pulseA": course.classNumber !== undefined &&
                                     course.classNumber === currentClassNumber &&
-                                    specifiedDate.toDateString() === currentTime.toDateString()&&
+                                    specifiedDate.toDateString() === currentTime.toDateString() &&
                                     course.courseColor === "blue"
                             },
                             {
                                 " shadow-lg animate-pulseB": course.classNumber !== undefined &&
-                                course.classNumber === currentClassNumber &&
-                                specifiedDate.toDateString() === currentTime.toDateString()&&
-                                course.courseColor === "green"
+                                    course.classNumber === currentClassNumber &&
+                                    specifiedDate.toDateString() === currentTime.toDateString() &&
+                                    course.courseColor === "green"
                             }
                         )} key={index}>
                             <div>{course.course}</div>
