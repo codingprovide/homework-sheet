@@ -8,7 +8,7 @@ interface CourseList {
     classroom?: string,
     courseColor?: string,
     classNumber?: number,
-    id:string
+    id?:string
 }
 
 interface Color {

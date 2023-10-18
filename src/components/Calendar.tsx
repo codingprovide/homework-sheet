@@ -47,8 +47,9 @@ function Calendar() {
     course?: string,
     classroom?: string,
     courseColor?: string,
-    classNumber?: number
-  }
+    classNumber?:number,
+    id?:string
+}
 
   const changeMondayCourse = function (mondayCourse: CourseList[]) {
     const isOddNumber = getWeekisOddNumber(specifiedDate);
