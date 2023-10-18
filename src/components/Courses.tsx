@@ -1,13 +1,14 @@
 import getDay from "date-fns/getDay"
 import clsx from "clsx"
 import { parse, isWithinInterval } from "date-fns"
-import { useState, useEffect, useLayoutEffect } from 'react'
+import { useState, useEffect,  } from 'react'
 
 interface CourseList {
     course?: string,
     classroom?: string,
     courseColor?: string,
-    classNumber?: number
+    classNumber?: number,
+    id:string
 }
 
 interface Color {
@@ -30,12 +31,9 @@ interface Courses {
 function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, thuresdayCourse, fridayCourse, colorVariants }: Courses) {
 
     const [currentClassNumber, setCurrentClassNumber] = useState<number | undefined>(undefined);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isRendered, setIsRendered] = useState(false);
     
     useEffect(() => {
         // 使用 requestAnimationFrame 替代 setInterval
-        setIsLoading(false);
 
         if (specifiedDate.toDateString() === currentTime.toDateString()) {
 
@@ -55,11 +53,6 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
 
         }
     }, [specifiedDate]);
-
-    useLayoutEffect(() => {
-        setIsRendered(true);
-    }, [isLoading])
-
 
     
     interface ClassTimeList {
@@ -137,9 +130,9 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
 
     return (
         <>
-            {courseData[getDayOfWeek as keyof CourseData] && isRendered &&(
+            {courseData[getDayOfWeek as keyof CourseData] && (
                 <div className="h-full w-4/6 grid grid-rows-5 absolute z-10 right-0 p-1 text-sm pt-0">
-                    {courseData[getDayOfWeek as keyof CourseData].map((course, index) => (
+                    {courseData[getDayOfWeek as keyof CourseData].map((course) => (
                         <div className={clsx(
                             colorVariants[course.courseColor as keyof Color],
                             "text-center rounded-sm justify-center items-center grid mt-1",
@@ -155,7 +148,7 @@ function Courses({ specifiedDate, mondayCourse, tuesdayCourse, wednesdayCourse, 
                                     specifiedDate.toDateString() === currentTime.toDateString() &&
                                     course.courseColor === "green"
                             }
-                        )} key={index}>
+                        )} key={course.id}>
                             <div>{course.course}</div>
                             <div>{course.classroom}</div>
                         </div>
